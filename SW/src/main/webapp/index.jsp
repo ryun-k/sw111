@@ -10,6 +10,7 @@
 <body>
   <h1>스프링 프로젝트 대문</h1>
 	<a href="./member/loginForm.do">로그인(오라클)</a><br/><br/>
-	<a href="./fileBoard/boardList.do">파일게시판</a>
+	<a href="./fileBoard/boardList.do">파일게시판</a><br/><br/>
+	<a href="./notice/List.do">notice</a>
 </body>
 </html>

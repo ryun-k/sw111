@@ -45,10 +45,14 @@
 	<bean id="fileBoardDAO" class="ws.com.dao.FileBoardDAO" >
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
+	 <bean id="noticeDAO" class="ws.com.dao.NoticeDAO" >
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+   </bean>
 		
 	<!-- serviece bean처리 -->
 	<bean id="memberService" class="ws.com.service.MemberService"/>
 	<bean id="fileBoardService" class="ws.com.service.FileBoardService"/>
+	<bean id="noticeService" class="ws.com.service.NoticeService"/>
 		
 </beans>
 

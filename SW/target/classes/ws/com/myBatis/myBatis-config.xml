@@ -16,14 +16,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<typeAliases>
 		<typeAlias alias="hMap" type="java.util.HashMap" />
-		<!-- <typeAlias alias="int" type="java.lang.Integer" /> -->
+		<typeAlias alias="int" type="java.lang.Integer" />
 		<typeAlias alias="fileBoard" type="ws.com.vo.FileBoardVO" />
+		<typeAlias alias="noticeVO" type="ws.com.vo.NoticeVo" />
 	</typeAliases>
 	
 	<!-- 	myBasits가 사용할 SQL 파일을 등록하는 부분	 -->
 	<mappers>
 		<mapper resource="/ws/com/sql/MemberSQL.xml" />
 		<mapper resource="/ws/com/sql/FileBoardSQL.xml" />
+		<mapper resource="/ws/com/sql/NoticeSQL.xml" />
 	</mappers>
 
 </configuration>

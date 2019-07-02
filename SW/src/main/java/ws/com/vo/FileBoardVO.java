@@ -6,9 +6,9 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
-//ÆÄÀÏ¿¡ ´ëÇÑ ¿©·¯°¡Áö Á¤º¸¸¦ ´ã´çÇÒ Å¬·¡½º
+//íŒŒì¼ì— ëŒ€í•œ ì—¬ëŸ¬ê°€ì§€ ì •ë³´ë¥¼ ë‹´ë‹¹í•  í´ë˜ìŠ¤
 public class FileBoardVO {
-	//ÇÊ¿äÇÏ¸é ´Ù¸¥ Á¤º¸µµ Ãß°¡
+	//í•„ìš”í•˜ë©´ ë‹¤ë¥¸ ì •ë³´ë„ ì¶”ê°€
 	private String id;
 	private String writer;
 	private String title;
@@ -16,28 +16,28 @@ public class FileBoardVO {
 	private String pw;
 	
 	//private MultipartFile files;
-	//µ¿ÀÏÇÑ ÀÌ¸§À¸·Î ¾÷·ÎµåµÇ´Â ÆÄÀÏÀÌ ÇÑ °³ÀÏ °æ¿ì ÀÏ¹İº¯¼ö
+	//ë™ì¼í•œ ì´ë¦„ìœ¼ë¡œ ì—…ë¡œë“œë˜ëŠ” íŒŒì¼ì´ í•œ ê°œì¼ ê²½ìš° ì¼ë°˜ë³€ìˆ˜
 	
 	private MultipartFile[] files;
-	//µ¿ÀÏÇÑ ÀÌ¸§À¸·Î ¾÷·ÎµåµÇ´Â ÆÄÀÏÀÌ ¿©·¯ °³ÀÏ °æ¿ì ¹è¿­º¯¼ö
+	//ë™ì¼í•œ ì´ë¦„ìœ¼ë¡œ ì—…ë¡œë“œë˜ëŠ” íŒŒì¼ì´ ì—¬ëŸ¬ ê°œì¼ ê²½ìš° ë°°ì—´ë³€ìˆ˜
 	
-	private	int no;	//¹øÈ£
+	private	int no;	//ë²ˆí˜¸
 	
-	private	int oriNo; //°Ô½Ã¹°¹øÈ£
-	private	String path; //ÀúÀåµÈ °æ·Î	
-	private	String oriName; //¿ø·¡ÀÌ¸§
-	private	String saveName; //ÆÄÀÏÀÇ ½ÇÁ¦ÀúÀåÀÌ¸§
-	private	long   len;	//ÆÄÀÏÀÇ Å©±â
+	private	int oriNo; //ê²Œì‹œë¬¼ë²ˆí˜¸
+	private	String path; //ì €ì¥ëœ ê²½ë¡œ	
+	private	String oriName; //ì›ë˜ì´ë¦„
+	private	String saveName; //íŒŒì¼ì˜ ì‹¤ì œì €ì¥ì´ë¦„
+	private	long   len;	//íŒŒì¼ì˜ í¬ê¸°
 	
-	private Date wDate; //ÀÛ¼ºÀÏ
-	private int	 hit;	//Á¶È¸¼ö
+	private Date wDate; //ì‘ì„±ì¼
+	private int	 hit;	//ì¡°íšŒìˆ˜
 	private String nick;
-	private int  fileCount; //Ã·ºÎÆÄÀÏ¼ö
+	private int  fileCount; //ì²¨ë¶€íŒŒì¼ìˆ˜
 	private int	 rno;
 	private int  start;
 	private int  end;
 	
-	private int fileNo;  //ÆÄÀÏ¹øÈ£
+	private int fileNo;  //íŒŒì¼ë²ˆí˜¸
 	private int nowPage;
 	
 	public int getNowPage() {
@@ -72,7 +72,7 @@ public class FileBoardVO {
 	}
 	public String getBrBody() {
 		String result = null;
-		if( body!=null && body.length()!=0 ) { //µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ¸é
+		if( body!=null && body.length()!=0 ) { //ë°ì´í„°ê°€ ì¡´ì¬í•˜ë©´
 			result = body.replaceAll("\r\n", "<br/>");
 		}
 		return result;
@@ -126,7 +126,7 @@ public class FileBoardVO {
 		this.saveName = saveName;
 	}
 	
-	//Ãµ´ÜÀ§¸¶´Ù ÄÄ¸¶Âï±â
+	//ì²œë‹¨ìœ„ë§ˆë‹¤ ì»´ë§ˆì°ê¸°
 	public String getComma() {
 		DecimalFormat form = new DecimalFormat("###,###,###");
 		return form.format(len);
@@ -140,25 +140,25 @@ public class FileBoardVO {
 	}
 	
 	public String getwDate() {
-		//³»°¡ ¿øÇÏ´Â ÀÛ¾÷À» ÇÒ ¼ö ÀÖ´Ù
-		SimpleDateFormat form = new SimpleDateFormat("yyyy.MM.dd hh½Ã mmºĞ a");
+		//ë‚´ê°€ ì›í•˜ëŠ” ì‘ì—…ì„ í•  ìˆ˜ ìˆë‹¤
+		SimpleDateFormat form = new SimpleDateFormat("yyyy.MM.dd hhì‹œ mmë¶„ a");
 		
 		return form.format(wDate);
 		
 	}
 	
-	//ÇÔ¼ö¸¦ ÇÊ¿ä¿¡ ÀÇÇØ¼­ Ãß°¡
+	//í•¨ìˆ˜ë¥¼ í•„ìš”ì— ì˜í•´ì„œ ì¶”ê°€
 	public String getWDate2() {
 		SimpleDateFormat form1 = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat form2 = new SimpleDateFormat("hh:mm:ss");
 		
-		String now   = form1.format(new Date()); //ÇöÀçÀÏ½ÃÁ¤º¸ÀÇ Æ÷¸Ëº¯°æ
-		String wDay  = form1.format(wDate); //±ÛÀÛ¼ºÀÏÁ¤º¸ÀÇ Æ÷¸Ëº¯°æ
+		String now   = form1.format(new Date()); //í˜„ì¬ì¼ì‹œì •ë³´ì˜ í¬ë§·ë³€ê²½
+		String wDay  = form1.format(wDate); //ê¸€ì‘ì„±ì¼ì •ë³´ì˜ í¬ë§·ë³€ê²½
 		
-		if( !now.equals(wDay) ) { //¿À´Ã³¯Â¥¸¦ ÀÛ¼ºÀÏ°ú ºñ±³ÇÏ¿© µ¿ÀÏÇÏÁö¾ÊÀ» °æ¿ì
+		if( !now.equals(wDay) ) { //ì˜¤ëŠ˜ë‚ ì§œë¥¼ ì‘ì„±ì¼ê³¼ ë¹„êµí•˜ì—¬ ë™ì¼í•˜ì§€ì•Šì„ ê²½ìš°
 			return wDay;
 		}
-		else { //ÀÛ¼ºÀÏÀÌ ¿À´Ã³¯Â¥¿Í µ¿ÀÏÇÏ¸é
+		else { //ì‘ì„±ì¼ì´ ì˜¤ëŠ˜ë‚ ì§œì™€ ë™ì¼í•˜ë©´
 			return form2.format(wDate);
 		}
 	}

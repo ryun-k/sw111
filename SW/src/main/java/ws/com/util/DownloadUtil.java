@@ -13,74 +13,74 @@ import org.springframework.web.servlet.view.AbstractView;
 
 import ws.com.vo.FileBoardVO;
 
-/* ÀÌ Å¬·¡½º´Â ½ºÆ®¸² ¹æ½ÄÀ¸·Î  
- * ¼­¹öÀÇ ÆÄÀÏÀ»  Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü´ŞÇÒ ¸ñÀûÀ¸·Î »ç¿ëÇÒ Å¬·¡½º
+/* ì´ í´ë˜ìŠ¤ëŠ” ìŠ¤íŠ¸ë¦¼ ë°©ì‹ìœ¼ë¡œ  
+ * ì„œë²„ì˜ íŒŒì¼ì„  í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ë‹¬í•  ëª©ì ìœ¼ë¡œ ì‚¬ìš©í•  í´ë˜ìŠ¤
  * 
- * ½ºÇÁ¸µ¿¡¼­ ´Ù¿î·Îµå¸¦ À§ÇÑ Å¬·¡½º¸¦ ¸¸µé±â
- * Á¶°Ç
- * 1. ¹İµå½Ã AbstractViewÅ¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ¾ß ÇÑ´Ù => ºä ÆĞÅ°Áö ¼Ò¼Ó
- * 2. ¹İµå½Ã renderMergedOutputModel()¸Ş¼Òµå¸¦  ¿À¹ö¶óÀÌµùÇØ¾ß ÇÑ´Ù
+ * ìŠ¤í”„ë§ì—ì„œ ë‹¤ìš´ë¡œë“œë¥¼ ìœ„í•œ í´ë˜ìŠ¤ë¥¼ ë§Œë“¤ê¸°
+ * ì¡°ê±´
+ * 1. ë°˜ë“œì‹œ AbstractViewí´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ì•¼ í•œë‹¤ => ë·° íŒ¨í‚¤ì§€ ì†Œì†
+ * 2. ë°˜ë“œì‹œ renderMergedOutputModel()ë©”ì†Œë“œë¥¼  ì˜¤ë²„ë¼ì´ë”©í•´ì•¼ í•œë‹¤
  */
 
 public class DownloadUtil extends AbstractView{
 
-	//»ı¼ºÀÚÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­
-	//ÀÌ Å¬·¡½º°¡ new°¡ µÇ¸é  ÀÀ´ä¹æ½ÄÀ» ½ºÆ®¸²¹æ½ÄÀ¸·Î º¯°æÇÏµµ·Ï ÇÒ ¿¹Á¤
+	//ìƒì„±ìí•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ
+	//ì´ í´ë˜ìŠ¤ê°€ newê°€ ë˜ë©´  ì‘ë‹µë°©ì‹ì„ ìŠ¤íŠ¸ë¦¼ë°©ì‹ìœ¼ë¡œ ë³€ê²½í•˜ë„ë¡ í•  ì˜ˆì •
 	public DownloadUtil() {
 		this.setContentType("application/download;charset=UTF-8");
 	}
 	
-	//ÀÌ ÇÔ¼ö°¡ ½ÇÁ¦ÀûÀ¸·Î ½ºÆ®¸²¹æ½ÄÀ¸·Î   
-	//ÆÄÀÏÀ» Å¬¶óÀÌ¾ğÆ®¿¡°Ô Àü´ŞÇÒ ÀÛ¾÷À» ´ã´çÇÔ¼ö
+	//ì´ í•¨ìˆ˜ê°€ ì‹¤ì œì ìœ¼ë¡œ ìŠ¤íŠ¸ë¦¼ë°©ì‹ìœ¼ë¡œ   
+	//íŒŒì¼ì„ í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì „ë‹¬í•  ì‘ì—…ì„ ë‹´ë‹¹í•¨ìˆ˜
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
-		//ÆÄ¶ó¹ÌÅÍ model => ÄÁÆ®·Ñ·¯°¡ Á¦°øÇÏ´Â  ´Ù¿î·Îµå ÆÄÀÏ¿¡ ´ëÇÑ Á¤º¸¸¦ ±â¾ïÇÒ º¯¼ö
-		//¿ì¸®³¢¸®ÀÇ ¾à¼Ó
-		// ÄÁÆ®·Ñ·¯¿¡¼­´Â   downloadFile  ÀÌ¶ó´Â Å°°ªÀ¸·Î ÆÄÀÏÀÇ Á¤º¸¸¦ ¾Ë·ÁÁÖ±â·Î ÇÏÀÚ
-		//            ÆÄÀÏÁ¤º¸´Â               FileÅ¬·¡½º·Î ³Ñ°Ü¹ŞÀ»½Ã
-		//File file = (File)model.get("downloadFile");--1¹ø¹æ½Ä
+		//íŒŒë¼ë¯¸í„° model => ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì œê³µí•˜ëŠ”  ë‹¤ìš´ë¡œë“œ íŒŒì¼ì— ëŒ€í•œ ì •ë³´ë¥¼ ê¸°ì–µí•  ë³€ìˆ˜
+		//ìš°ë¦¬ë¼ë¦¬ì˜ ì•½ì†
+		// ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œëŠ”   downloadFile  ì´ë¼ëŠ” í‚¤ê°’ìœ¼ë¡œ íŒŒì¼ì˜ ì •ë³´ë¥¼ ì•Œë ¤ì£¼ê¸°ë¡œ í•˜ì
+		//            íŒŒì¼ì •ë³´ëŠ”               Fileí´ë˜ìŠ¤ë¡œ ë„˜ê²¨ë°›ì„ì‹œ
+		//File file = (File)model.get("downloadFile");--1ë²ˆë°©ì‹
 		
-		//      ÆÄÀÏÁ¤º¸´Â               FileBoardVOÅ¬·¡½º·Î ³Ñ°Ü¹ŞÀ»½Ã
-		FileBoardVO vo = (FileBoardVO)model.get("downloadFile");//--2¹ø¹æ½Ä
+		//      íŒŒì¼ì •ë³´ëŠ”               FileBoardVOí´ë˜ìŠ¤ë¡œ ë„˜ê²¨ë°›ì„ì‹œ
+		FileBoardVO vo = (FileBoardVO)model.get("downloadFile");//--2ë²ˆë°©ì‹
 		
-		//´Ù¿î·Îµå ÇØÁÙ È¯°æ¼³Á¤ ----------------------------
-		//ÀÀ´ä¹æ½ÄÀ» ½ºÆ®¸²¹æ½ÄÀ¸·Î  ¼¼ÆÃÇÏÀÚ
+		//ë‹¤ìš´ë¡œë“œ í•´ì¤„ í™˜ê²½ì„¤ì • ----------------------------
+		//ì‘ë‹µë°©ì‹ì„ ìŠ¤íŠ¸ë¦¼ë°©ì‹ìœ¼ë¡œ  ì„¸íŒ…í•˜ì
 		response.setContentType(this.getContentType());
 		
-		//ÀÀ´äÆÄÀÏÀÇ Å©±â ¾Ë·ÁÁÖ±â
-		//ÆÄÀÏÀÇ Å©±â´Â longÅ¸ÀÔÀ¸·Î ¸®ÅÏµÇÁö¸¸  ¾Æ·¡ÇÔ¼öÀÇ ÆÄ¶ó¹ÌÅÍÀ¯ÇüÀº intÀÌ¹Ç·Î Çüº¯È¯
-		//response.setContentLength( (int)file.length());--1¹ø¹æ½Ä	
+		//ì‘ë‹µíŒŒì¼ì˜ í¬ê¸° ì•Œë ¤ì£¼ê¸°
+		//íŒŒì¼ì˜ í¬ê¸°ëŠ” longíƒ€ì…ìœ¼ë¡œ ë¦¬í„´ë˜ì§€ë§Œ  ì•„ë˜í•¨ìˆ˜ì˜ íŒŒë¼ë¯¸í„°ìœ í˜•ì€ intì´ë¯€ë¡œ í˜•ë³€í™˜
+		//response.setContentLength( (int)file.length());--1ë²ˆë°©ì‹	
 		
-		response.setContentLength( (int)vo.getLen());//--2¹ø¹æ½Ä
+		response.setContentLength( (int)vo.getLen());//--2ë²ˆë°©ì‹
 		
-		//´Ù¿î·Îµå½ÃÄÑÁÙ ÆÄÀÏÀÇ ÀÌ¸§ÁöÁ¤ÇÏ±â
-		//Å¬¶óÀÌ¾ğÆ®´Â ÀÌ ÆÄÀÏÀÇ ÀÌ¸§À» º¸°í ´Ù¿î·Îµå¿©ºÎ¸¦ °áÁ¤ÇÏ°Ô µÈ´Ù
-		//¹®Á¦´Â ÆÄÀÏÀÌ¸§ÀÌ ÇÑ±ÛÀÌ¸é ±úÁúÀ§ÇèÀÌ ÀÖ´Ù
-		//°í·Î ÆÄÀÏ¸í¿¡ ÇÑ±ÛÀÌ Á¸ÀçÇÏ¸é encodingÃ³¸®¸¦ ÇØ¾ß ÇÑ´Ù
-		//String encoding=new String(file.getName().getBytes("UTF-8"), "8859_1");--1¹ø¹æ½Ä
+		//ë‹¤ìš´ë¡œë“œì‹œì¼œì¤„ íŒŒì¼ì˜ ì´ë¦„ì§€ì •í•˜ê¸°
+		//í´ë¼ì´ì–¸íŠ¸ëŠ” ì´ íŒŒì¼ì˜ ì´ë¦„ì„ ë³´ê³  ë‹¤ìš´ë¡œë“œì—¬ë¶€ë¥¼ ê²°ì •í•˜ê²Œ ëœë‹¤
+		//ë¬¸ì œëŠ” íŒŒì¼ì´ë¦„ì´ í•œê¸€ì´ë©´ ê¹¨ì§ˆìœ„í—˜ì´ ìˆë‹¤
+		//ê³ ë¡œ íŒŒì¼ëª…ì— í•œê¸€ì´ ì¡´ì¬í•˜ë©´ encodingì²˜ë¦¬ë¥¼ í•´ì•¼ í•œë‹¤
+		//String encoding=new String(file.getName().getBytes("UTF-8"), "8859_1");--1ë²ˆë°©ì‹
 
-		String encoding=new String(vo.getOriName().getBytes("UTF-8"), "8859_1");//--2¹ø¹æ½Ä
+		String encoding=new String(vo.getOriName().getBytes("UTF-8"), "8859_1");//--2ë²ˆë°©ì‹
 		
 		response.setHeader("Content-Disposition", "attachment;filename="+encoding);
 		
-		//½ºÆ®¸² ¹æ½ÄÀ¸·Î ´Ù¿î·Îµå¸¦ ½ÇÇà------------------------
-		// ÆÄÀÏÀÇ Á¤º¸¸¦ ÀĞ¾î¼­..
+		//ìŠ¤íŠ¸ë¦¼ ë°©ì‹ìœ¼ë¡œ ë‹¤ìš´ë¡œë“œë¥¼ ì‹¤í–‰------------------------
+		// íŒŒì¼ì˜ ì •ë³´ë¥¼ ì½ì–´ì„œ..
 		FileInputStream fin = null;
 		OutputStream    fout = null;
 		
-		//vo¸¦ ÀÌ¿ëÇØ¼­ ÀÛ¾÷½Ã¿¡´Â file°´Ã¼¸¦ ¸¸µé¾î¼­ inputStream()À¸·Î ÀÚ·áÁ¦°ø
-		File file = new File(vo.getPath(),vo.getOriName());//--2¹ø¹æ½Ä
-		fin = new FileInputStream(file);//--1¹ø¹æ½Ä//--2¹ø¹æ½Ä °øÅëÄÚµå
+		//voë¥¼ ì´ìš©í•´ì„œ ì‘ì—…ì‹œì—ëŠ” fileê°ì²´ë¥¼ ë§Œë“¤ì–´ì„œ inputStream()ìœ¼ë¡œ ìë£Œì œê³µ
+		File file = new File(vo.getPath(),vo.getOriName());//--2ë²ˆë°©ì‹
+		fin = new FileInputStream(file);//--1ë²ˆë°©ì‹//--2ë²ˆë°©ì‹ ê³µí†µì½”ë“œ
 		fout = response.getOutputStream(); 
 		
-		//½ºÇÁ¸µ¿¡¼­´Â   ÇÑÂÊ¿¡¼­ ÀĞÀº ³»¿ëÀ»  ´Ù¸¥ÂÊ¿¡ ¾²´Â ºÎºĞÀ» ÇÔ¼ö·Î Á¦°øÇÏ°í ÀÖ´Ù
-		//»ç¿ëÇÔ¼ö        FileCopyUtils.copy(InputStream°´Ã¼,OutputStream°´Ã¼);
+		//ìŠ¤í”„ë§ì—ì„œëŠ”   í•œìª½ì—ì„œ ì½ì€ ë‚´ìš©ì„  ë‹¤ë¥¸ìª½ì— ì“°ëŠ” ë¶€ë¶„ì„ í•¨ìˆ˜ë¡œ ì œê³µí•˜ê³  ìˆë‹¤
+		//ì‚¬ìš©í•¨ìˆ˜        FileCopyUtils.copy(InputStreamê°ì²´,OutputStreamê°ì²´);
 		try {
 			FileCopyUtils.copy(fin,fout);
 		} catch (Exception e) {
-			System.out.println("´Ù¿î·Îµå Ã³¸®°ü·Ã ¿¡·¯="+e);
+			System.out.println("ë‹¤ìš´ë¡œë“œ ì²˜ë¦¬ê´€ë ¨ ì—ëŸ¬="+e);
 		}
 		finally {
 			fout.flush();

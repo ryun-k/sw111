@@ -7,75 +7,75 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import ws.com.vo.FileBoardVO;
 
-//ÀÌ Å¬·¡½º´Â ÆÄÀÏ¾÷·Îµå °ü·Ã Äõ¸®¸¦ ½ÇÇàÇÒ DAOÅ¬·¡½ºÀÌ´Ù
-//myBatis¸¦ ÀÌ¿ëÇØ¼­   ÇÊ¿äÇÑ Äõ¸®¹®À» ½ÇÇàÇÏ°í 
-//±× °á°ú¸¦ ¾Ë·ÁÁÙ  DAOÅ¬·¡½ºÀÌ´Ù.
-//myBatis¸¦ ÀÌ¿ëÇÑ DAO Å¬·¡½º´Â ¹İµå½Ã 
-//SqlSessionDaoSupport Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ¾ß ÇÑ´Ù
+//ì´ í´ë˜ìŠ¤ëŠ” íŒŒì¼ì—…ë¡œë“œ ê´€ë ¨ ì¿¼ë¦¬ë¥¼ ì‹¤í–‰í•  DAOí´ë˜ìŠ¤ì´ë‹¤
+//myBatisë¥¼ ì´ìš©í•´ì„œ   í•„ìš”í•œ ì¿¼ë¦¬ë¬¸ì„ ì‹¤í–‰í•˜ê³  
+//ê·¸ ê²°ê³¼ë¥¼ ì•Œë ¤ì¤„  DAOí´ë˜ìŠ¤ì´ë‹¤.
+//myBatisë¥¼ ì´ìš©í•œ DAO í´ë˜ìŠ¤ëŠ” ë°˜ë“œì‹œ 
+//SqlSessionDaoSupport í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ì•¼ í•œë‹¤
 
 
-//±âÁ¸ JSP¿¡¼­ÀÇ ½ºÅ×ÀÌÆ®¸ÕÆ®°¡  myBatis¿¡¼­´Â SessionÀÌ¶ó°í ¸»ÇÑ´Ù
-//SessionÀ» ¸¸µå´Â ¹æ¹ı2
-//1. getSqlSession()ÀÌ¿ë
-//2. DI¸¦ ÀÌ¿ë
+//ê¸°ì¡´ JSPì—ì„œì˜ ìŠ¤í…Œì´íŠ¸ë¨¼íŠ¸ê°€  myBatisì—ì„œëŠ” Sessionì´ë¼ê³  ë§í•œë‹¤
+//Sessionì„ ë§Œë“œëŠ” ë°©ë²•2
+//1. getSqlSession()ì´ìš©
+//2. DIë¥¼ ì´ìš©
 public class FileBoardDAO extends SqlSessionDaoSupport{
 	
-	//ÃÑ µ¥ÀÌÅÍ °³¼ö Á¶È¸ Äõ¸®½ÇÇà ÇÔ¼ö
+	//ì´ ë°ì´í„° ê°œìˆ˜ ì¡°íšŒ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜
 	public int getTotalCount() {
 		/*SqlSession session = this.getSqlSession();
 		int result = session.selectOne("fileBoard.totalCount");
 		return result;*/
 		
-		//À§ÀÇ ÄÚµå¸¦ ÁÙÀÏ ¼ö ÀÖ´Ù
+		//ìœ„ì˜ ì½”ë“œë¥¼ ì¤„ì¼ ìˆ˜ ìˆë‹¤
 		return (Integer)getSqlSession().selectOne("fileBoard.totalCount");
 		
-		/*Âü°í
-		 * Äõ¸®½ÇÇà¸í·É¿¡¼­
-		 * selectOneÀº 	°á°ú°¡ ÇÑ   ÁÙ·Î ³ª¿À´Â °æ¿ì »ç¿ë
-		 * selectList´Â	°á°ú°¡ ¿©·¯ ÁÙ·Î ³ª¿À´Â °æ¿ì »ç¿ë
+		/*ì°¸ê³ 
+		 * ì¿¼ë¦¬ì‹¤í–‰ëª…ë ¹ì—ì„œ
+		 * selectOneì€ 	ê²°ê³¼ê°€ í•œ   ì¤„ë¡œ ë‚˜ì˜¤ëŠ” ê²½ìš° ì‚¬ìš©
+		 * selectListëŠ”	ê²°ê³¼ê°€ ì—¬ëŸ¬ ì¤„ë¡œ ë‚˜ì˜¤ëŠ” ê²½ìš° ì‚¬ìš©
 		 */
 	}
 	
 	
-	//¸ñ·Ï Á¶È¸ Äõ¸®½ÇÇà ÇÔ¼ö
+	//ëª©ë¡ ì¡°íšŒ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜
 	public ArrayList getBoardList(FileBoardVO vo) {
 		return (ArrayList) getSqlSession().selectList("fileBoard.boardList",vo);
 	}
 	
 	
 	
-	//µ¥ÀÌÅÍ ÀÔ·Â Äõ¸®½ÇÇà ÇÔ¼ö
+	//ë°ì´í„° ì…ë ¥ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜
 	public void insertBoard(FileBoardVO vo,String kind) {
-		//ÆÄ¶ó¹ÌÅÍ·Î vo¸¦ »ç¿ëÇÑ ÀÌÀ¯ : Äõ¸®½ÇÇà½Ã Á¤º¸¸¦ vo·Î Á¦½ÃÇÏ±â·Î ¾à¼Ó
+		//íŒŒë¼ë¯¸í„°ë¡œ voë¥¼ ì‚¬ìš©í•œ ì´ìœ  : ì¿¼ë¦¬ì‹¤í–‰ì‹œ ì •ë³´ë¥¼ voë¡œ ì œì‹œí•˜ê¸°ë¡œ ì•½ì†
 		SqlSession session = this.getSqlSession();
 		
-		if(kind.equals("board")) {//fileBoard¿¡ µ¥ÀÌÅÍÀÔ·Â
+		if(kind.equals("board")) {//fileBoardì— ë°ì´í„°ì…ë ¥
 			session.insert("fileBoard.insertBoard", vo);
 		}
-		else if(kind.equals("fileInfo")){//fileInfo¿¡ µ¥ÀÌÅÍÀÔ·Â
+		else if(kind.equals("fileInfo")){//fileInfoì— ë°ì´í„°ì…ë ¥
 			session.insert("fileBoard.insertFileInfo", vo);
 		}
 	}
 	
 	
-	//»ó¼¼º¸±â°Ë»ö Äõ¸®½ÇÇà ÇÔ¼ö
+	//ìƒì„¸ë³´ê¸°ê²€ìƒ‰ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜
 	public FileBoardVO getBoardView(int no) {
 		return (FileBoardVO)getSqlSession().selectOne("fileBoard.boardView",no);
 	}
 
 	
-	//Á¶È¸¼öÁõ°¡ Äõ¸®½ÇÇà ÇÔ¼ö~~~~~~~~~~~~~~~~~~~~
+	//ì¡°íšŒìˆ˜ì¦ê°€ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜~~~~~~~~~~~~~~~~~~~~
 	public void updateHit(int oriNo) {
 		getSqlSession().update("fileBoard.updateHit",oriNo);
 	}
 	
-	//Ã·ºÎÆÄÀÏ Äõ¸®½ÇÇà ÇÔ¼ö
+	//ì²¨ë¶€íŒŒì¼ ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜
 	public ArrayList getFileInfo(int oriNo) {
 		return (ArrayList)getSqlSession().selectList("fileBoard.fileInfo", oriNo);
 	}
 	
 	
-	//´Ù¿î·Îµå ÆÄÀÏ Á¤º¸ °Ë»öÄõ¸®½ÇÇà ÇÔ¼ö 
+	//ë‹¤ìš´ë¡œë“œ íŒŒì¼ ì •ë³´ ê²€ìƒ‰ì¿¼ë¦¬ì‹¤í–‰ í•¨ìˆ˜ 
 	public FileBoardVO  getDownloadFile(int fileNo) {
 		return (FileBoardVO)getSqlSession().selectOne("fileBoard.download",fileNo);	
 	}

@@ -15,26 +15,26 @@ public class FileBoardService {
 	@Autowired
 	private FileBoardDAO fDAO;
 	
-	//ÆäÀÌÂ¡Ã³¸® ½ÇÇàÇÔ¼ö
+	//í˜ì´ì§•ì²˜ë¦¬ ì‹¤í–‰í•¨ìˆ˜
 	public PageUtil getPageInfo(int nowPage) {
-		//ÃÑ µ¥ÀÌÅÍ °³¼ö ±¸ÇÏÀÚ
+		//ì´ ë°ì´í„° ê°œìˆ˜ êµ¬í•˜ì
 		int totalCount = fDAO.getTotalCount();
 		
 		PageUtil pageInfo = new PageUtil(nowPage,totalCount,3,5);
 		return pageInfo;
 	}
 	
-	//¸ñ·ÏÀ» ±¸ÇÏ´Â ÇÔ¼ö
+	//ëª©ë¡ì„ êµ¬í•˜ëŠ” í•¨ìˆ˜
 	public ArrayList getBoardList(PageUtil  pInfo){
-		//ÆÄ¶ó¹ÌÅÍ°¡ PageUtil ÀÎ ÀÌÀ¯´Â
-		//¸ñ·ÏÀ» ±¸ÇÏ´Âµ¥ »ç¿ëµÇ´Â Äõ¸®¹®ÀÇ whereÁ¶°Ç¹®¿¡ 
-		//RNO BETWEEN #{start} AND #{end}ÀÌ »ç¿ëµÇ°í
-		//¿ä ³»¿ëÀ» Ã¤¿öÁà¾ß ÇÑ´Ù
-		//nowPage¿¡ µû¶ó¼­ start¿Í end°¡ º¯ÇÏ±â ¶§¹®
-		/*nowPage°¡ 1ÀÌ¸é          1  3
-		 *         2ÀÌ¸é         4   6
+		//íŒŒë¼ë¯¸í„°ê°€ PageUtil ì¸ ì´ìœ ëŠ”
+		//ëª©ë¡ì„ êµ¬í•˜ëŠ”ë° ì‚¬ìš©ë˜ëŠ” ì¿¼ë¦¬ë¬¸ì˜ whereì¡°ê±´ë¬¸ì— 
+		//RNO BETWEEN #{start} AND #{end}ì´ ì‚¬ìš©ë˜ê³ 
+		//ìš” ë‚´ìš©ì„ ì±„ì›Œì¤˜ì•¼ í•œë‹¤
+		//nowPageì— ë”°ë¼ì„œ startì™€ endê°€ ë³€í•˜ê¸° ë•Œë¬¸
+		/*nowPageê°€ 1ì´ë©´          1  3
+		 *         2ì´ë©´         4   6
 		 */
-		                     //(ÇöÀçÆäÀÌÁö-1) * ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ °Ô½Ã¹°¼ö     +1
+		                     //(í˜„ì¬í˜ì´ì§€-1) * í•œí˜ì´ì§€ì— ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ìˆ˜     +1
 		int start = (pInfo.getNowPage()-1) * pInfo.getListCount()+1;
 		int end   = start + pInfo.getListCount() -1;
 		
@@ -46,23 +46,23 @@ public class FileBoardService {
 		return list;
 	}
 	
-	//µ¥ÀÌÅÍÀÔ·Â ½ÇÇàÇÔ¼ö È£Ãâ
+	//ë°ì´í„°ì…ë ¥ ì‹¤í–‰í•¨ìˆ˜ í˜¸ì¶œ
 	public void inserBoard(FileBoardVO vo,
 			HttpSession session,ArrayList list) {
-		//ÆÄ¶ó¹ÌÅÍ·Î vo¸¦ »ç¿ëÇÑ ÀÌÀ¯ : Äõ¸®½ÇÇà½Ã Á¤º¸¸¦ vo·Î Á¦½ÃÇÏ±â·Î ¾à¼Ó
-		//ÆÄ¶ó¹ÌÅÍ·Î sessionÀ» »ç¿ëÇÑ ÀÌÀ¯ : Äõ¸®ÀÔ·Â½Ã ±Û¾´ÀÌÁ¤º¸¸¦ ¼¼¼Ç¿¡ ¹Ş¾Æ¼­
+		//íŒŒë¼ë¯¸í„°ë¡œ voë¥¼ ì‚¬ìš©í•œ ì´ìœ  : ì¿¼ë¦¬ì‹¤í–‰ì‹œ ì •ë³´ë¥¼ voë¡œ ì œì‹œí•˜ê¸°ë¡œ ì•½ì†
+		//íŒŒë¼ë¯¸í„°ë¡œ sessionì„ ì‚¬ìš©í•œ ì´ìœ  : ì¿¼ë¦¬ì…ë ¥ì‹œ ê¸€ì“´ì´ì •ë³´ë¥¼ ì„¸ì…˜ì— ë°›ì•„ì„œ
 		
-		//¼¼¼Ç¿¡¼­ ÇÊ¿äÇÑ Á¤º¸¸¦ °¡Á®¿Í (ºñ¾îÀÖ´Â id¸¦ ¸¶Á®) ¼¼ÆÃÇØÁØ´Ù
+		//ì„¸ì…˜ì—ì„œ í•„ìš”í•œ ì •ë³´ë¥¼ ê°€ì ¸ì™€ (ë¹„ì–´ìˆëŠ” idë¥¼ ë§ˆì ¸) ì„¸íŒ…í•´ì¤€ë‹¤
 		String id = (String)session.getAttribute("UID");
 		vo.setId(id);
-		//fileBoard¿¡ µ¥ÀÌÅÍÀÔ·Â
+		//fileBoardì— ë°ì´í„°ì…ë ¥
 		fDAO.insertBoard(vo,"board");
 		
-		//fileInfo¿¡ µ¥ÀÌÅÍÀÔ·Â
-		//Ã·ºÎÆÄÀÏ¿¡ ´ëÇÑ Á¤º¸´Â list¿¡ ´ã°ÜÀÖ°í
-		//listÀÇ °³¼ö¸¸Å­ 
+		//fileInfoì— ë°ì´í„°ì…ë ¥
+		//ì²¨ë¶€íŒŒì¼ì— ëŒ€í•œ ì •ë³´ëŠ” listì— ë‹´ê²¨ìˆê³ 
+		//listì˜ ê°œìˆ˜ë§Œí¼ 
 		for(int i=0; i<list.size(); i++) {
-			//Ã·ºÎÆÄÀÏÀÇ °¢Á¤º¸¸¦ VO¿¡ ¼¼ÆÃ
+			//ì²¨ë¶€íŒŒì¼ì˜ ê°ì •ë³´ë¥¼ VOì— ì„¸íŒ…
 			vo.setOriNo(vo.getNo());/*	#{oriNo}*/
 			HashMap map =(HashMap)list.get(i);	
 			vo.setPath((String)map.get("path"));
@@ -70,56 +70,56 @@ public class FileBoardService {
 			vo.setSaveName((String)map.get("saveName"));
 			vo.setLen((Long)map.get("len"));
 			
-			//Ã·ºÎÆÄÀÏÀÇ °³¼ö¸¸Å­ insertÇÏÀÚ
+			//ì²¨ë¶€íŒŒì¼ì˜ ê°œìˆ˜ë§Œí¼ insertí•˜ì
 			fDAO.insertBoard(vo,"fileInfo");
 		}
 		
 	}
 	
-	//»ó¼¼º¸±â ¿äÃ» Ã³¸®ÇÔ¼ö
+	//ìƒì„¸ë³´ê¸° ìš”ì²­ ì²˜ë¦¬í•¨ìˆ˜
 	public FileBoardVO getBoardView(int oriNo) {
 		FileBoardVO vo = fDAO.getBoardView(oriNo);
 		return vo;
 	}
 	
 	
-	//Á¶È¸¼ö Áõ°¡ ¿äÃ» Ã³¸®ÇÔ¼ö
+	//ì¡°íšŒìˆ˜ ì¦ê°€ ìš”ì²­ ì²˜ë¦¬í•¨ìˆ˜
 	public void updateHit(int oriNo, HttpSession session) {
-		//¼¼¼Ç¿¡ Å¬¸¯ÇÑ ±Û¹øÈ£¸¦ ArrayList¿¡ ±â·Ï
-		//¼¼¼ÇÀÌ ¾ø´Ù?-> Á¶È¸¼öÁõ°¡
-		//¼¼¼ÇÀÌ ÀÖ´Ï?-> ÇØ´ç±ÛÀ» º»ÀûÀÌ ¾ø´Ù->Á¶È¸¼öÁõ°¡
-		//           È¤Àº ÀÖ´Ù->Á¶È¸¼öÁõ°¡x
-		boolean isHit = false; //Á¶È¸¼öÁõ°¡ÇÒÁö¸»Áö¸¦ ±â¾ïÇÒ º¯¼ö
+		//ì„¸ì…˜ì— í´ë¦­í•œ ê¸€ë²ˆí˜¸ë¥¼ ArrayListì— ê¸°ë¡
+		//ì„¸ì…˜ì´ ì—†ë‹¤?-> ì¡°íšŒìˆ˜ì¦ê°€
+		//ì„¸ì…˜ì´ ìˆë‹ˆ?-> í•´ë‹¹ê¸€ì„ ë³¸ì ì´ ì—†ë‹¤->ì¡°íšŒìˆ˜ì¦ê°€
+		//           í˜¹ì€ ìˆë‹¤->ì¡°íšŒìˆ˜ì¦ê°€x
+		boolean isHit = false; //ì¡°íšŒìˆ˜ì¦ê°€í• ì§€ë§ì§€ë¥¼ ê¸°ì–µí•  ë³€ìˆ˜
 		ArrayList hitList = (ArrayList)session.getAttribute("HIT");
 		
-		if(hitList==null || hitList.size()==0) { //°Ô½ÃÆÇ±¸°æ Ã³À½ÇÏ´Â À¯Àú
-			isHit = true; //Á¶È¸¼öÁõ°¡ÇÒ ¿¹Á¤À¸·Î true°ª ºÎ¿©
-			hitList = new ArrayList(); //ÄíÆù¹ÙÇà
-			hitList.add(oriNo); //±Û¹øÈ£ ±â·Ï
+		if(hitList==null || hitList.size()==0) { //ê²Œì‹œíŒêµ¬ê²½ ì²˜ìŒí•˜ëŠ” ìœ ì €
+			isHit = true; //ì¡°íšŒìˆ˜ì¦ê°€í•  ì˜ˆì •ìœ¼ë¡œ trueê°’ ë¶€ì—¬
+			hitList = new ArrayList(); //ì¿ í°ë°”í–‰
+			hitList.add(oriNo); //ê¸€ë²ˆí˜¸ ê¸°ë¡
 			session.setAttribute("HIT",hitList);
 		}
-		else if( !hitList.contains(oriNo) ){ //ÇØ´ç±ÛÀ» º»ÀûÀÌ ¾ø´Ï?
+		else if( !hitList.contains(oriNo) ){ //í•´ë‹¹ê¸€ì„ ë³¸ì ì´ ì—†ë‹ˆ?
 			isHit = true;
-			hitList.add(oriNo);//±Û¹øÈ£ ±â·Ï
+			hitList.add(oriNo);//ê¸€ë²ˆí˜¸ ê¸°ë¡
 			session.setAttribute("HIT",hitList);
 		}
-		else { //ÇØ´ç °Ô½Ã¹°À» º»ÀûÀÌ ÀÖ´Â À¯Àú´Ù
-			isHit = false; //Á¶È¸¼ö Áõ°¡¾ÈÇÒ²¨´Ï±î
+		else { //í•´ë‹¹ ê²Œì‹œë¬¼ì„ ë³¸ì ì´ ìˆëŠ” ìœ ì €ë‹¤
+			isHit = false; //ì¡°íšŒìˆ˜ ì¦ê°€ì•ˆí• êº¼ë‹ˆê¹Œ
 		}
 		
 		if(isHit == true) {
-			fDAO.updateHit(oriNo);//Á¶È¸¼öÁõ°¡
+			fDAO.updateHit(oriNo);//ì¡°íšŒìˆ˜ì¦ê°€
 		}
 	}
 	
 	
-	//Ã·ºÎÆÄÀÏ °Ë»ö ¿äÃ» Ã³¸®ÇÔ¼ö
+	//ì²¨ë¶€íŒŒì¼ ê²€ìƒ‰ ìš”ì²­ ì²˜ë¦¬í•¨ìˆ˜
 	public ArrayList getFileInfo(int oriNo) {
 		ArrayList list = fDAO.getFileInfo(oriNo);
 		return list;
 	}
 	
-	//´Ù¿î·Îµå ÆÄÀÏ Á¤º¸ °Ë»ö ¿äÃ» Ã³¸®ÇÔ¼ö
+	//ë‹¤ìš´ë¡œë“œ íŒŒì¼ ì •ë³´ ê²€ìƒ‰ ìš”ì²­ ì²˜ë¦¬í•¨ìˆ˜
 	public FileBoardVO getDownloadFile(int fileNo) {
 		FileBoardVO  vo = fDAO.getDownloadFile(fileNo);
 		return vo;

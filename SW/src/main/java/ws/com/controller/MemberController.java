@@ -16,34 +16,34 @@ public class MemberController {
 	@Autowired
 	MemberService mService;
 	
-	//·Î±×ÀÎ Æû º¸¿©ÁÖ±â ¿äÃ»
+	//ë¡œê·¸ì¸ í¼ ë³´ì—¬ì£¼ê¸° ìš”ì²­
 	@RequestMapping("/member/loginForm.do")
 	public String loginForm() {
-		//1.ÆÄ¶ó¹ÌÅÍ ¹Þ°í
-		//2.ºñÁî´Ï½º ·ÎÁ÷¼öÇà¸¦ ¼­ºñ½º¿¡°Ô À§ÀÓ
-		//3.¸ðµ¨
-		//4.ºä
+		//1.íŒŒë¼ë¯¸í„° ë°›ê³ 
+		//2.ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ìˆ˜í–‰ë¥¼ ì„œë¹„ìŠ¤ì—ê²Œ ìœ„ìž„
+		//3.ëª¨ë¸
+		//4.ë·°
 		return "member/loginForm";
-		//ÁÖÀÇ ºäÁöÁ¤½Ã   ¸Ç ¾Õ¿¡´Â /¾øÀÌ...   ¸Ç ¸¶Áö¸·¿¡´Â È®ÀåÀÚ¾øÀÌ   ÀÛ¼º
+		//ì£¼ì˜ ë·°ì§€ì •ì‹œ   ë§¨ ì•žì—ëŠ” /ì—†ì´...   ë§¨ ë§ˆì§€ë§‰ì—ëŠ” í™•ìž¥ìžì—†ì´   ìž‘ì„±
 	}
 	
-	//·Î±×ÀÎÃ³¸®
+	//ë¡œê·¸ì¸ì²˜ë¦¬
 	@RequestMapping("/member/loginProc.do")
 	public ModelAndView loginProc(MemberVO vo, HttpSession session) {
-		//1.(VOÅ¬·¡½º¸¦ ÀÌ¿ëÇØ¼­) ÆÄ¶ó¹ÌÅÍ ¹Þ°í
+		//1.(VOí´ëž˜ìŠ¤ë¥¼ ì´ìš©í•´ì„œ) íŒŒë¼ë¯¸í„° ë°›ê³ 
 		
-		//2.ºñÁî´Ï½º ·ÎÁ÷¼öÇà¸¦ ¼­ºñ½º¿¡°Ô À§ÀÓ
-			//·Î±×ÀÎ °Ë»ç
-			//user°¡ ÀÔ·ÂÇÑ ³»¿ë°ú dbÀÇ ³»¿ëÀ» ºñ±³ÇÏ¿© È¸¿ø¿©ºÎ¸¦ ÆÇ´Ü
+		//2.ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ìˆ˜í–‰ë¥¼ ì„œë¹„ìŠ¤ì—ê²Œ ìœ„ìž„
+			//ë¡œê·¸ì¸ ê²€ì‚¬
+			//userê°€ ìž…ë ¥í•œ ë‚´ìš©ê³¼ dbì˜ ë‚´ìš©ì„ ë¹„êµí•˜ì—¬ íšŒì›ì—¬ë¶€ë¥¼ íŒë‹¨
 		//MemberService mService = new MemberService();
 		mService.loginProc(vo, session);
-		//·Î±×ÀÎÀÌ ³¡³ª¸é   (·Î±×ÀÎ¼º°øÀÌ¸é ¼¼¼Ç¿¡ ÇÊ¿äÇÑ Á¤º¸°¡ ´ã±äÈÄ..)
-		//´ÙÀ½ ÀÛ¾÷À» À§ÇÑ ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±âÀ§ÇÑ ¿äÃ»ÀÌ ÀÖ¾î¾ßÇÏÁö¸¸
-		//¿©±â¿¡¼­´Â ¿ì¼± ·Î±×ÀÎÆûÀ¸·Î ÀÌµ¿½ÃÅ³¿¹Á¤
-		//4.ºä
+		//ë¡œê·¸ì¸ì´ ëë‚˜ë©´   (ë¡œê·¸ì¸ì„±ê³µì´ë©´ ì„¸ì…˜ì— í•„ìš”í•œ ì •ë³´ê°€ ë‹´ê¸´í›„..)
+		//ë‹¤ìŒ ìž‘ì—…ì„ ìœ„í•œ íŽ˜ì´ì§€ë¡œ ì´ë™í•˜ê¸°ìœ„í•œ ìš”ì²­ì´ ìžˆì–´ì•¼í•˜ì§€ë§Œ
+		//ì—¬ê¸°ì—ì„œëŠ” ìš°ì„  ë¡œê·¸ì¸í¼ìœ¼ë¡œ ì´ë™ì‹œí‚¬ì˜ˆì •
+		//4.ë·°
 		ModelAndView mv = new ModelAndView();
 		RedirectView rv = new RedirectView("../member/loginForm.do");
-		//ÇÊ¿äÇÏ¸é ÆÄ¶ó¹ÌÅÍ¸¦ Æ÷ÇÔ½ÃÅ³ ¼ö ÀÖ´Ù
+		//í•„ìš”í•˜ë©´ íŒŒë¼ë¯¸í„°ë¥¼ í¬í•¨ì‹œí‚¬ ìˆ˜ ìžˆë‹¤
 		//rv.addSaticAttribue(~,~);
 		mv.setView(rv);
 		return mv;

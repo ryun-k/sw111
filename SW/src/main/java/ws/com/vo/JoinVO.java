@@ -6,14 +6,14 @@ public class JoinVO {
 	private String pw;
 	private String name;
 	
-	//Å¸ÀÔ
+	//íƒ€ìž…
 	private int	   age;	 
 	
-	//µ¿ÀÏÇÑ name°ªÀÌ ¿©·¯°³¶óµµ VOÅ¬·¡½º¿¡¼­ ¹è¿­º¯¼ö·Î ¹ÞÀ¸¸é ´Ù ¹ÞÀ» ¼ö ÀÖ´Ù
+	//ë™ì¼í•œ nameê°’ì´ ì—¬ëŸ¬ê°œë¼ë„ VOí´ëž˜ìŠ¤ì—ì„œ ë°°ì—´ë³€ìˆ˜ë¡œ ë°›ìœ¼ë©´ ë‹¤ ë°›ì„ ìˆ˜ ìžˆë‹¤
 	private String[] hobby;
 	
-	// ¹Ýµå½Ã setXxx()ÇÔ¼ö°¡ ÀÖ¾î¾ß ÇÑ´Ù
-	// setXxx()ÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ µ¥ÀÌÅÍ¸¦ VOÅ¬·¡½º¿¡ ÀÔ·ÂÇÏ±â ¶§¹®.
+	// ë°˜ë“œì‹œ setXxx()í•¨ìˆ˜ê°€ ìžˆì–´ì•¼ í•œë‹¤
+	// setXxx()í•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ ë°ì´í„°ë¥¼ VOí´ëž˜ìŠ¤ì— ìž…ë ¥í•˜ê¸° ë•Œë¬¸.
 	
 	
 	public String[] getHobby() {

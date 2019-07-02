@@ -2,50 +2,50 @@ package ws.com.util;
 
 import java.io.File;
 
-//ÀÌ Å¬·¡½º´Â ÆÄÀÏ¾÷·Îµå¿¡ °ü·ÃµÈ ±â´ÉÀ» °¡Áø Å¬·¡½º
+//ì´ í´ëž˜ìŠ¤ëŠ” íŒŒì¼ì—…ë¡œë“œì— ê´€ë ¨ëœ ê¸°ëŠ¥ì„ ê°€ì§„ í´ëž˜ìŠ¤
 public class FileUtil {
 
-	//¸¸¾à Æú´õ°¡ ¾ø´Ù¸é ÀÚµ¿À¸·Î Æú´õ¸¦ »ý¼ºÇØÁÙ²²	
+	//ë§Œì•½ í´ë”ê°€ ì—†ë‹¤ë©´ ìžë™ìœ¼ë¡œ í´ë”ë¥¼ ìƒì„±í•´ì¤„ê»˜	
 	private static void makeFoler(String path) {
-		//Á¦½ÃµÈ path¸¦ ÀÌ¿ëÇÏ¿© FileÅ¬·¡½º¸¦ ¸¸µé°í
+		//ì œì‹œëœ pathë¥¼ ì´ìš©í•˜ì—¬ Fileí´ëž˜ìŠ¤ë¥¼ ë§Œë“¤ê³ 
 		File file = new File(path);
 
-		//±× °æ·Î¸¦ ÀÌ¿ëÇÏ¿© Æú´õ¸¦ »ý¼º
+		//ê·¸ ê²½ë¡œë¥¼ ì´ìš©í•˜ì—¬ í´ë”ë¥¼ ìƒì„±
 		file.mkdirs();
 	}
 	
 	
-	//¸¸¾à µ¿ÀÏÇÑ ÀÌ¸§À» °¡Áø ÆÄÀÏÀÌ Á¸ÀçÇÏ¸é
-	//ÇöÀç ÆÄÀÏÀÇ ÀÌ¸§À» ¹Ù²Ù¾îÁÜÀ¸·Î½á
-	//µ¤¾î¾²±â°¡ µÇÁö ¾Êµµ·Ï ¹æÁöÇÏ±â À§ÇÑ ÇÔ¼ö
+	//ë§Œì•½ ë™ì¼í•œ ì´ë¦„ì„ ê°€ì§„ íŒŒì¼ì´ ì¡´ìž¬í•˜ë©´
+	//í˜„ìž¬ íŒŒì¼ì˜ ì´ë¦„ì„ ë°”ê¾¸ì–´ì¤Œìœ¼ë¡œì¨
+	//ë®ì–´ì“°ê¸°ê°€ ë˜ì§€ ì•Šë„ë¡ ë°©ì§€í•˜ê¸° ìœ„í•œ í•¨ìˆ˜
 	public static String renameTo(String path, String oriName) {
 		
 		makeFoler(path);
 		
-		//ÆÄÀÏÀ» ¸¸µé¶§¿¡´Â ¾îµð(Æú´õ)¿¡ ¹«½¼ ÀÌ¸§À¸·Î ¸¸µé°ÍÀÎÁö ÁöÁ¤ÇØ¾ß ÇÑ´Ù
-		//new File(¾îµð¿¡, ¹«½¼ÀÌ¸§);
+		//íŒŒì¼ì„ ë§Œë“¤ë•Œì—ëŠ” ì–´ë””(í´ë”)ì— ë¬´ìŠ¨ ì´ë¦„ìœ¼ë¡œ ë§Œë“¤ê²ƒì¸ì§€ ì§€ì •í•´ì•¼ í•œë‹¤
+		//new File(ì–´ë””ì—, ë¬´ìŠ¨ì´ë¦„);
 		//a.txt -> a_1.txt
-		String tempName = oriName; //ÇöÀç ÀÌ¸§
+		String tempName = oriName; //í˜„ìž¬ ì´ë¦„
 		int		count = 0;
 		
-		//ÇöÀç ÀúÀåÇÒ ÆÄÀÏÀÇ ÀÌ¸§À» FileÅ¬·¡½º·Î ¹Ù²Ù°í
+		//í˜„ìž¬ ì €ìž¥í•  íŒŒì¼ì˜ ì´ë¦„ì„ Fileí´ëž˜ìŠ¤ë¡œ ë°”ê¾¸ê³ 
 		File file = new File(path, tempName);
 		
-		//ÀÌ·± ÆÄÀÏÁ¸ÀçÇÏ´Ï?
+		//ì´ëŸ° íŒŒì¼ì¡´ìž¬í•˜ë‹ˆ?
 		while(file.exists()) {
-			//±×·¸´Ù¸é ÀÌ¸§À» ¹Ù²ÙÀÚ			
-			//.À» ±âÁØÀ¸·Î ¾ÕÀÇ ºÎºÐ ÃßÃâ
+			//ê·¸ë ‡ë‹¤ë©´ ì´ë¦„ì„ ë°”ê¾¸ìž			
+			//.ì„ ê¸°ì¤€ìœ¼ë¡œ ì•žì˜ ë¶€ë¶„ ì¶”ì¶œ
 			int index = oriName.lastIndexOf(".");
-			String fileN = oriName.substring(0, index); //0ºÎÅÍ index-1±îÁö ÃßÃâ
-			String extN  = oriName.substring(index+1); //.µÚºÎÅÍ ¹®ÀÚ¿­ÀÇ ³¡±îÁö ÃßÃâ
+			String fileN = oriName.substring(0, index); //0ë¶€í„° index-1ê¹Œì§€ ì¶”ì¶œ
+			String extN  = oriName.substring(index+1); //.ë’¤ë¶€í„° ë¬¸ìžì—´ì˜ ëê¹Œì§€ ì¶”ì¶œ
 			
-			//ºÙÀÏ ¹øÈ£ Áõ°¡
+			//ë¶™ì¼ ë²ˆí˜¸ ì¦ê°€
 			count = count + 1;
 			
-			//ÆÄÀÏÀÌ¸§¿¡ _¹øÈ£¸¦ ºÙÀÌ±â
+			//íŒŒì¼ì´ë¦„ì— _ë²ˆí˜¸ë¥¼ ë¶™ì´ê¸°
 			fileN = fileN+"_"+count;
 			
-			//ºÙ¿©Áø ÀÌ¸§µÚ¿¡ È®ÀåÀÚ¸¦ ºÙ¿©ÁÜÀ¸·ÎÀÎÇØ ¿ÂÀüÇÑ ÆÄÀÏÀÌ¸§À» ´Ù½Ã ¸¸µç´Ù
+			//ë¶™ì—¬ì§„ ì´ë¦„ë’¤ì— í™•ìž¥ìžë¥¼ ë¶™ì—¬ì¤Œìœ¼ë¡œì¸í•´ ì˜¨ì „í•œ íŒŒì¼ì´ë¦„ì„ ë‹¤ì‹œ ë§Œë“ ë‹¤
 			tempName = fileN+"."+extN;
 			
 			file = new File(path, tempName);

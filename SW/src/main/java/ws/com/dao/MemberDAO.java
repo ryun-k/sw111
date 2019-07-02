@@ -6,31 +6,31 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
-// myBatis¸¦ ÀÌ¿ëÇØ¼­   ÇÊ¿äÇÑ Äõ¸®¹®À» ½ÇÇàÇÏ°í 
-// ±× °á°ú¸¦ ¾Ë·ÁÁÙ  DAOÅ¬·¡½ºÀÌ´Ù.
-// myBatis¸¦ ÀÌ¿ëÇÑ DAO Å¬·¡½º´Â ¹İµå½Ã 
-// SqlSessionDaoSupport Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ¾ß ÇÑ´Ù
+// myBatisë¥¼ ì´ìš©í•´ì„œ   í•„ìš”í•œ ì¿¼ë¦¬ë¬¸ì„ ì‹¤í–‰í•˜ê³  
+// ê·¸ ê²°ê³¼ë¥¼ ì•Œë ¤ì¤„  DAOí´ë˜ìŠ¤ì´ë‹¤.
+// myBatisë¥¼ ì´ìš©í•œ DAO í´ë˜ìŠ¤ëŠ” ë°˜ë“œì‹œ 
+// SqlSessionDaoSupport í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ì•¼ í•œë‹¤
 
 
-// ±âÁ¸ JSP¿¡¼­ÀÇ ½ºÅ×ÀÌÆ®¸ÕÆ®°¡  myBatis¿¡¼­´Â SessionÀÌ¶ó°í ¸»ÇÑ´Ù
-// SessionÀ» ¸¸µå´Â ¹æ¹ı2
-// 1. getSqlSession()ÀÌ¿ë
-// 2. DI¸¦ ÀÌ¿ë
+// ê¸°ì¡´ JSPì—ì„œì˜ ìŠ¤í…Œì´íŠ¸ë¨¼íŠ¸ê°€  myBatisì—ì„œëŠ” Sessionì´ë¼ê³  ë§í•œë‹¤
+// Sessionì„ ë§Œë“œëŠ” ë°©ë²•2
+// 1. getSqlSession()ì´ìš©
+// 2. DIë¥¼ ì´ìš©
 public class MemberDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	//·Î±×ÀÎ Ã³¸®
+	//ë¡œê·¸ì¸ ì²˜ë¦¬
 	public  HashMap loginProc(HashMap map) {
-		//1. getSqlSession()ÀÌ¿ë
+		//1. getSqlSession()ì´ìš©
 		//SqlSession session = this.getSqlSession();q
-		// ¸ğµç ÇÔ¼ö¸¦ ½ÇÇàÇÒ ¶§ ¸¶´Ù ¸Å¹ø ¹Ş¾Æ¾ß ÇÑ´Ù´Â ´ÜÁ¡
+		// ëª¨ë“  í•¨ìˆ˜ë¥¼ ì‹¤í–‰í•  ë•Œ ë§ˆë‹¤ ë§¤ë²ˆ ë°›ì•„ì•¼ í•œë‹¤ëŠ” ë‹¨ì 
 		
-		//session.½ÇÇàÄõ¸®¹®¿¡ ÇØ´çÇÏ´Â ÇÔ¼ö("½ÇÇàÄõ¸®¹®",Object ÆÄ¶ó¹ÌÅÍ)
-		//selectList½ÇÇà°á°ú°¡ ¿©·¯ ÁÙÀÎ °æ¿ì
-		//selectOne ½ÇÇà°á°ú°¡ ÇÑ    ÁÙÀÎ °æ¿ì
-		//selectMap ½ÇÇà°á°ú°¡ MapÀÎ °æ¿ì(selectOne°ú µ¿ÀÏ°³³ä)
-		//select	±âº» ÁúÀÇ ¸í·É
+		//session.ì‹¤í–‰ì¿¼ë¦¬ë¬¸ì— í•´ë‹¹í•˜ëŠ” í•¨ìˆ˜("ì‹¤í–‰ì¿¼ë¦¬ë¬¸",Object íŒŒë¼ë¯¸í„°)
+		//selectListì‹¤í–‰ê²°ê³¼ê°€ ì—¬ëŸ¬ ì¤„ì¸ ê²½ìš°
+		//selectOne ì‹¤í–‰ê²°ê³¼ê°€ í•œ    ì¤„ì¸ ê²½ìš°
+		//selectMap ì‹¤í–‰ê²°ê³¼ê°€ Mapì¸ ê²½ìš°(selectOneê³¼ ë™ì¼ê°œë…)
+		//select	ê¸°ë³¸ ì§ˆì˜ ëª…ë ¹
 		HashMap result = session.selectOne("member.loginProc", map);
 		return result;
 	}

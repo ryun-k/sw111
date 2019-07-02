@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<annotation-driven />
+
+	<resources mapping="/resources/**" location="/resources/" />
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 여기에서는 views 폴더의 위치는 변경하지 않고 /WEB-INF/views/ 그대로 가기로함 -->
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 파일 업로드에 사용할 라이브러리 등록 -->
+	<beans:bean id="multipartResolver" 		
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--	최대 업로드 파일의 용량을 지정.	 -->
+		<beans:property name="maxUploadSize" 	value="1073741824" /> 
+		<!--	최대 업로드 메모리를 지정
+					주로 최대 업로드 파일의 용량과 동일하게 지정하면 된다.
+		-->
+		<beans:property name="maxInMemorySize"  value="1073741824" />
+		<!--	파일의 이름이 한글인 경우 엔코딩 방식을 지정	-->
+		<beans:property name="defaultEncoding" value="UTF-8" />
+  </beans:bean>
+	
+	<!-- 인터셉터 설정 -->
+	<beans:bean id="myinterceptor" class="ws.com.util.LoginCheck"/>
+	<interceptors>
+     <interceptor>
+			<!-- 언제 인터셉터가 처리될지를 지정하는 부분 -->
+			<mapping path="/fileBoard/writeForm.do"/>
+			<mapping path="/fileBoard/writeProc.do"/>
+			<!-- 인터셉터 예외지정 -->
+			<exclude-mapping path="/fileBoard/boardList.do"/>
+			<!-- 사용할 인터셉터 클래스를 등록하는 부분 -->
+			 <!-- 방법1 < bean class="인터셉터클래스" >		
+       <beans:bean class="ws.com.util.LoginCheck"/> -->
+       <!-- 방법2 < beans:ref bean="인터셉터클래스id" > -->
+      <beans:ref bean="myinterceptor"/> 
+     </interceptor>
+   </interceptors>
+	
+	
+	<!-- 컨트롤러가 만들어지는 기본 경로를 지정하는 부분 -->
+	<context:component-scan base-package="ws.com" />
+	
+	<!-- 파일 다운로드를 위한 빈 등록 
+		1. 사용자 뷰를 이용하겠다고 등록
+		   	이 사용자 뷰는 다른 일반 뷰보다 먼저 처리하도록 order를 지정해야 한다
+		2. 이용할 사용자 뷰를 지정   	
+	-->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+			<beans:property name="order" value="0"></beans:property>
+	</beans:bean>
+	<beans:bean id="download" class="ws.com.util.DownloadUtil"/>
+
+</beans:beans>			
+
+
+	
